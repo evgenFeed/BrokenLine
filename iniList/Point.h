@@ -4,10 +4,9 @@ class Point
 {
 public:
 	Point(int x, int y);
-	const std::pair<int, int> getCoords();
-	const Point& operator-(const Point& p);
-
+	std::pair<int, int> getCoords() const;
+	const Point operator-(const Point& p);
 private:
-	int x, y;
+	std::pair<int, int> coords;
 };
 

@@ -1,18 +1,14 @@
 #include "Point.h"
 
 Point::Point(int x, int y) :
-	x(x),
-	y(y)
+	coords{x,y}
 {
-	
+
+}
+std::pair<int, int> Point::getCoords() const {
+	return coords;
 }
 
-const std::pair<int, int> Point::getCoords()
-{
-	return std::pair<int, int> {x, y};
-}
-
-const Point& Point::operator-(const Point& p)
-{
-	return Point(this->x - p.x, this->y - p.y);
+const Point Point::operator-(const Point& p) {
+	return Point(coords.first - p.getCoords().first, coords.second - p.getCoords().second);
 }

@@ -14,7 +14,7 @@ private:
 	std::vector<T>		line;
 	unsigned int		num;
 	float				length;
-	std::vector<Point*>	points;
+	std::vector<Point>	points;
 private:
 	void				checkLength();
 };
@@ -26,10 +26,16 @@ inline BrokenLine<T>::BrokenLine(std::initializer_list<T> pointS) :
 	length(0),
 	num(0)
 {
-	int i = 0;
-	while (line.size() % 2 > 0 ? i < line.size() - 1 : i < line.size())
+	int i = 0, j = 0;
+	if (line.size() % 2 > 0) {
+		j = line.size() - 1;
+	}
+	else {
+		j = line.size();
+	}
+	while (i < j)
 	{
-		points.push_back(new Point(line[i], line[i + 1]));
+		points.push_back(Point(line[i], line[i + 1]));
 		i += 2;
 	}
 }
@@ -45,7 +51,7 @@ inline void BrokenLine<T>::getPoints()
 {
 	for (auto p : points)
 	{
-		std::cout << "first : " << p->getCoords().first << " second : " << p->getCoords().second << std::endl;
+		std::cout << "first : " << p.getCoords().first << " second : " << p.getCoords().second << std::endl;
 	}
 	std::cout << "points: " << points.size() << " " << std::endl;
 }
@@ -54,6 +60,6 @@ inline void BrokenLine<T>::checkLength()
 {
 	for (int i = 0; i < points.size()-1; i++)
 	{
-		length += sqrt(pow(points[i + 1]->getCoords().first - points[i]->getCoords().first, 2) + pow(points[i + 1]->getCoords().second - points[i]->getCoords().second, 2));
+		length += sqrt(pow(points[i + 1].getCoords().first - points[i].getCoords().first, 2) + pow(points[i + 1].getCoords().second - points[i].getCoords().second, 2));
 	}
 };
